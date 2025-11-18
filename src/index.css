@@ -1,0 +1,232 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* CSS Variables for theming - these can be modified live! */
+:root {
+  /* Light theme (default) */
+  --color-background: #ffffff;
+  --color-foreground: #0a0a0a;
+  --color-primary: #3b82f6;
+  --color-secondary: #8b5cf6;
+  --color-accent: #06b6d4;
+  --color-muted: #6b7280;
+  --color-border: #e5e7eb;
+
+  --sidebar-width: 280px;
+  --editor-font-size: 16px;
+  --line-height: 1.6;
+}
+
+/* Dark theme */
+.dark {
+  --color-background: #0a0a0a;
+  --color-foreground: #fafafa;
+  --color-primary: #60a5fa;
+  --color-secondary: #a78bfa;
+  --color-accent: #22d3ee;
+  --color-muted: #9ca3af;
+  --color-border: #27272a;
+}
+
+/* Midnight theme - example custom theme */
+.theme-midnight {
+  --color-background: #0f0f1e;
+  --color-foreground: #e0e0ff;
+  --color-primary: #7c3aed;
+  --color-secondary: #ec4899;
+  --color-accent: #f59e0b;
+  --color-muted: #a1a1c8;
+  --color-border: #1e1e3f;
+}
+
+/* Solarized theme */
+.theme-solarized {
+  --color-background: #fdf6e3;
+  --color-foreground: #657b83;
+  --color-primary: #268bd2;
+  --color-secondary: #6c71c4;
+  --color-accent: #2aa198;
+  --color-muted: #93a1a1;
+  --color-border: #eee8d5;
+}
+
+/* Nord theme */
+.theme-nord {
+  --color-background: #2e3440;
+  --color-foreground: #eceff4;
+  --color-primary: #88c0d0;
+  --color-secondary: #b48ead;
+  --color-accent: #a3be8c;
+  --color-muted: #d8dee9;
+  --color-border: #3b4252;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background: var(--color-background);
+  color: var(--color-foreground);
+  overflow: hidden;
+}
+
+#root {
+  width: 100vw;
+  height: 100vh;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--color-muted);
+  border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-primary);
+}
+
+/* Smooth transitions */
+* {
+  transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+}
+
+/* Selection styling */
+::selection {
+  background: var(--color-primary);
+  color: var(--color-background);
+}
+
+/* Prose styles for markdown preview */
+.prose {
+  color: var(--color-foreground);
+  max-width: 65ch;
+}
+
+.prose h1,
+.prose h2,
+.prose h3,
+.prose h4,
+.prose h5,
+.prose h6 {
+  color: var(--color-foreground);
+  font-weight: 700;
+  margin-top: 1.5em;
+  margin-bottom: 0.5em;
+  line-height: 1.3;
+}
+
+.prose h1 {
+  font-size: 2.25em;
+}
+
+.prose h2 {
+  font-size: 1.75em;
+}
+
+.prose h3 {
+  font-size: 1.5em;
+}
+
+.prose p {
+  margin-top: 1em;
+  margin-bottom: 1em;
+}
+
+.prose a {
+  color: var(--color-primary);
+  text-decoration: underline;
+}
+
+.prose a:hover {
+  color: var(--color-secondary);
+}
+
+.prose code {
+  background: var(--color-muted);
+  color: var(--color-background);
+  padding: 0.2em 0.4em;
+  border-radius: 0.25em;
+  font-size: 0.875em;
+  font-family: monospace;
+}
+
+.prose pre {
+  background: var(--color-foreground);
+  color: var(--color-background);
+  padding: 1em;
+  border-radius: 0.5em;
+  overflow-x: auto;
+  margin: 1.5em 0;
+}
+
+.prose pre code {
+  background: transparent;
+  padding: 0;
+  color: inherit;
+}
+
+.prose blockquote {
+  border-left: 4px solid var(--color-primary);
+  padding-left: 1em;
+  margin-left: 0;
+  font-style: italic;
+  color: var(--color-muted);
+}
+
+.prose ul,
+.prose ol {
+  margin-top: 1em;
+  margin-bottom: 1em;
+  padding-left: 1.5em;
+}
+
+.prose li {
+  margin-top: 0.5em;
+  margin-bottom: 0.5em;
+}
+
+.prose hr {
+  border: none;
+  border-top: 2px solid var(--color-border);
+  margin: 2em 0;
+}
+
+.prose table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1.5em 0;
+}
+
+.prose th,
+.prose td {
+  border: 1px solid var(--color-border);
+  padding: 0.5em 1em;
+  text-align: left;
+}
+
+.prose th {
+  background: var(--color-muted);
+  color: var(--color-background);
+  font-weight: 600;
+}
+
+.prose img {
+  max-width: 100%;
+  border-radius: 0.5em;
+  margin: 1.5em 0;
+}
