@@ -57,6 +57,49 @@ npm run preview
 
 Open [http://localhost:5173](http://localhost:5173) in your browser.
 
+## 📱 iPad & Mac Installation
+
+### Option 1: PWA (Progressive Web App) - Easiest!
+
+**For iPad:**
+1. Run `npm run dev` on your development machine
+2. Open the app in Safari on your iPad (use your machine's IP address)
+3. Tap the Share button
+4. Select "Add to Home Screen"
+5. The app now works offline and feels native!
+
+**For Mac:**
+1. Open the app in Safari
+2. File → Add to Dock
+3. Or use Chrome: Settings → Install BlueOx Notes
+
+### Option 2: Native iOS App (Requires Xcode on Mac)
+
+```bash
+# Build and open in Xcode
+npm run ios
+
+# Or just sync without opening
+npm run ios:sync
+```
+
+Then in Xcode:
+1. Select your iPad or simulator as the target
+2. Click Run (⌘R)
+3. App installs on your device!
+
+**Note:** You need:
+- macOS with Xcode installed
+- Apple Developer account (free tier works for personal use)
+- CocoaPods installed: `sudo gem install cocoapods`
+
+### Why Both Options?
+
+- **PWA**: Zero setup, works immediately, updates automatically
+- **Native**: Better integration, offline storage, can publish to App Store
+
+**Recommendation:** Start with PWA, it's perfect for personal use!
+
 ## 📖 Usage
 
 ### Creating Notes
@@ -188,6 +231,8 @@ npm run lint
 
 ## 🔮 Roadmap
 
+- [x] PWA support (install on iPad/Mac)
+- [x] iOS app via Capacitor
 - [ ] Export notes (Markdown, PDF, HTML)
 - [ ] Import from other apps (Obsidian, Notion, etc.)
 - [ ] Tags and advanced filtering
@@ -196,8 +241,8 @@ npm run lint
 - [ ] Dark mode for code editor
 - [ ] Plugin system
 - [ ] Cloud sync (optional)
-- [ ] Mobile apps
-- [ ] Desktop app (Electron/Tauri)
+- [ ] Android app
+- [ ] macOS native app (via Mac Catalyst or Tauri)
 
 ## 🤝 Contributing
 
