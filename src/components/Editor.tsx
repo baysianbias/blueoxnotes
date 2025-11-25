@@ -82,7 +82,7 @@ export default function Editor() {
   return (
     <div className="flex h-full flex-col">
       {/* Editor header */}
-      <div className="border-b border-border p-4">
+      <div className="flex min-h-[88px] flex-col justify-between border-b border-border p-4">
         <input
           type="text"
           value={currentNote.title}

@@ -43,7 +43,7 @@ export default function Preview() {
   return (
     <div className="flex h-full flex-col overflow-hidden">
       {/* Preview header */}
-      <div className="border-b border-border p-4">
+      <div className="flex min-h-[88px] items-center border-b border-border p-4">
         <h2 className="text-xl font-bold text-foreground">Preview</h2>
       </div>
 
