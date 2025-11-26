@@ -1,6 +1,6 @@
-import { useState } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { useStore } from '../store';
-import { Code, Database, Paintbrush, X, Copy, Check } from 'lucide-react';
+import { Code, Database, Paintbrush, X, Copy, Check, GripVertical } from 'lucide-react';
 
 type Tab = 'config' | 'state' | 'css';
 
@@ -8,6 +8,48 @@ export default function DevPanel() {
   const { setDevMode, config, notes } = useStore();
   const [activeTab, setActiveTab] = useState<Tab>('config');
   const [copied, setCopied] = useState(false);
+
+  // Draggable state
+  const [position, setPosition] = useState({ x: window.innerWidth - 400, y: window.innerHeight - 500 });
+  const [isDragging, setIsDragging] = useState(false);
+  const [dragOffset, setDragOffset] = useState({ x: 0, y: 0 });
+  const panelRef = useRef<HTMLDivElement>(null);
+
+  const handleMouseDown = (e: React.MouseEvent) => {
+    if (panelRef.current) {
+      const rect = panelRef.current.getBoundingClientRect();
+      setDragOffset({
+        x: e.clientX - rect.left,
+        y: e.clientY - rect.top,
+      });
+      setIsDragging(true);
+    }
+  };
+
+  useEffect(() => {
+    const handleMouseMove = (e: MouseEvent) => {
+      if (isDragging) {
+        setPosition({
+          x: Math.max(0, Math.min(e.clientX - dragOffset.x, window.innerWidth - 400)),
+          y: Math.max(0, Math.min(e.clientY - dragOffset.y, window.innerHeight - 100)),
+        });
+      }
+    };
+
+    const handleMouseUp = () => {
+      setIsDragging(false);
+    };
+
+    if (isDragging) {
+      document.addEventListener('mousemove', handleMouseMove);
+      document.addEventListener('mouseup', handleMouseUp);
+    }
+
+    return () => {
+      document.removeEventListener('mousemove', handleMouseMove);
+      document.removeEventListener('mouseup', handleMouseUp);
+    };
+  }, [isDragging, dragOffset]);
 
   const handleCopy = (text: string) => {
     navigator.clipboard.writeText(text);
@@ -195,16 +237,29 @@ export default function DevPanel() {
   };
 
   return (
-    <div className="fixed bottom-0 right-0 z-40 w-96 border-l border-t border-border bg-background shadow-2xl">
+    <div
+      ref={panelRef}
+      className="fixed z-40 w-96 rounded-lg border border-border bg-background shadow-2xl"
+      style={{
+        left: `${position.x}px`,
+        top: `${position.y}px`,
+        cursor: isDragging ? 'grabbing' : 'default',
+      }}
+    >
       {/* Header */}
-      <div className="flex items-center justify-between border-b border-border bg-primary/5 px-4 py-3">
+      <div
+        className="flex items-center justify-between border-b border-border bg-primary/5 px-4 py-3 cursor-grab active:cursor-grabbing rounded-t-lg"
+        onMouseDown={handleMouseDown}
+      >
         <div className="flex items-center gap-2">
+          <GripVertical className="text-muted" size={16} />
           <Code className="text-primary" size={18} />
           <span className="text-sm font-semibold text-foreground">Dev Panel</span>
         </div>
         <button
           onClick={() => setDevMode(false)}
           className="rounded p-1 text-muted hover:bg-muted/10 hover:text-foreground transition-colors"
+          onMouseDown={(e) => e.stopPropagation()}
         >
           <X size={16} />
         </button>
@@ -248,7 +303,7 @@ export default function DevPanel() {
       </div>
 
       {/* Content */}
-      <div className="h-96 overflow-y-auto p-4">{renderContent()}</div>
+      <div className="h-96 overflow-y-auto p-4 rounded-b-lg">{renderContent()}</div>
     </div>
   );
 }

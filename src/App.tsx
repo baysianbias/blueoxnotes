@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useStore } from './store';
 import Sidebar from './components/Sidebar';
 import Editor from './components/Editor';
@@ -6,9 +6,44 @@ import Preview from './components/Preview';
 import ThemeEditor from './components/ThemeEditor';
 import Settings from './components/Settings';
 import DevPanel from './components/DevPanel';
+import { Widget, WidgetView } from './components/Widget';
 
 function App() {
   const { config, showThemeEditor, showSettings, devMode } = useStore();
+  const [widgets, setWidgets] = useState<Widget[]>([]);
+
+  // Load widgets
+  useEffect(() => {
+    const loadWidgets = () => {
+      const stored = localStorage.getItem('blueox-widgets');
+      if (stored) {
+        try {
+          setWidgets(JSON.parse(stored));
+        } catch {
+          setWidgets([]);
+        }
+      }
+    };
+
+    loadWidgets();
+
+    // Listen for widget updates
+    const handleWidgetUpdate = () => loadWidgets();
+    window.addEventListener('widgets-updated', handleWidgetUpdate);
+    return () => window.removeEventListener('widgets-updated', handleWidgetUpdate);
+  }, []);
+
+  const updateWidget = (id: string, updates: Partial<Widget>) => {
+    const updated = widgets.map((w) => (w.id === id ? { ...w, ...updates } : w));
+    setWidgets(updated);
+    localStorage.setItem('blueox-widgets', JSON.stringify(updated));
+  };
+
+  const deleteWidget = (id: string) => {
+    const updated = widgets.filter((w) => w.id !== id);
+    setWidgets(updated);
+    localStorage.setItem('blueox-widgets', JSON.stringify(updated));
+  };
 
   // Apply theme
   useEffect(() => {
@@ -82,6 +117,16 @@ function App() {
       {showThemeEditor && <ThemeEditor />}
       {showSettings && <Settings />}
       {devMode && <DevPanel />}
+
+      {/* Widgets */}
+      {widgets.map((widget) => (
+        <WidgetView
+          key={widget.id}
+          widget={widget}
+          onUpdate={updateWidget}
+          onDelete={deleteWidget}
+        />
+      ))}
     </div>
   );
 }

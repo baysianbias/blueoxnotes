@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useStore } from '../store';
-import { FileText, Plus, Search, Settings, Palette, Code } from 'lucide-react';
+import { FileText, Plus, Search, Settings, Palette, Code, Boxes } from 'lucide-react';
+import { WidgetManager } from './Widget';
 
 export default function Sidebar() {
   const {
@@ -17,6 +18,7 @@ export default function Sidebar() {
   } = useStore();
 
   const [localSearch, setLocalSearch] = useState('');
+  const [showWidgetManager, setShowWidgetManager] = useState(false);
 
   const handleSearch = (query: string) => {
     setLocalSearch(query);
@@ -52,6 +54,13 @@ export default function Sidebar() {
       <div className="flex items-center justify-between border-b border-border p-4">
         <h1 className="text-xl font-bold text-foreground">BlueOx</h1>
         <div className="flex gap-2">
+          <button
+            onClick={() => setShowWidgetManager(true)}
+            className="rounded p-1.5 hover:bg-accent/20 text-muted hover:text-accent transition-colors"
+            title="Widgets 🧪"
+          >
+            <Boxes size={18} />
+          </button>
           <button
             onClick={() => setShowThemeEditor(true)}
             className="rounded p-1.5 hover:bg-primary/10 text-muted hover:text-primary transition-colors"
@@ -170,6 +179,9 @@ export default function Sidebar() {
           </div>
         )}
       </div>
+
+      {/* Widget Manager Modal */}
+      {showWidgetManager && <WidgetManager onClose={() => setShowWidgetManager(false)} />}
     </div>
   );
 }
