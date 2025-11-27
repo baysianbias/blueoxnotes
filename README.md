@@ -231,8 +231,10 @@ npm run lint
 
 ## 🔮 Roadmap
 
-- [x] PWA support (install on iPad/Mac)
-- [x] iOS app via Capacitor
+
+- [] make a real Mac OS application via native lobraries
+- [] make a real iOS application via native libraries
+- [] archive the rest of this, no PWA please
 - [ ] Export notes (Markdown, PDF, HTML)
 - [ ] Import from other apps (Obsidian, Notion, etc.)
 - [ ] Tags and advanced filtering
@@ -244,26 +246,7 @@ npm run lint
 - [ ] Android app
 - [ ] macOS native app (via Mac Catalyst or Tauri)
 
-## 🤝 Contributing
 
-This is a personal project, but contributions are welcome!
-
-1. Fork the repo
-2. Create a feature branch
-3. Make your changes
-4. Submit a pull request
-
-## 📄 License
-
-MIT License - feel free to use this however you want!
-
-## 🙏 Acknowledgments
-
-Inspired by:
-- Obsidian - for showing notes can be beautiful
-- Notion - for proving customization matters
-- Dear ImGui - for immediate mode philosophy
-- All the productivity apps that almost got it right
 
 ---
 
