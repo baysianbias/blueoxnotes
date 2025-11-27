@@ -27,7 +27,7 @@ class FloatingPanelController: NSObject {
         panel.becomesKeyOnlyIfNeeded = true
         panel.hidesOnDeactivate = false
 
-        // Frosted glass effect
+        // Liquid Glass effect (macOS 26 Tahoe)
         panel.isOpaque = false
         panel.backgroundColor = .clear
         panel.titlebarAppearsTransparent = true
@@ -83,6 +83,7 @@ struct FloatingPanelContent: View {
                 .buttonStyle(.plain)
             }
             .padding()
+            .glassEffect(in: .rect, isEnabled: true) // macOS 26 Tahoe Liquid Glass
             .background(.ultraThinMaterial)
 
             Divider()
@@ -117,6 +118,7 @@ struct FloatingPanelContent: View {
                 .padding()
             }
         }
+        .glassEffect(in: .rect, isEnabled: true) // Liquid Glass for the whole panel
         .background(.ultraThinMaterial)
     }
 

@@ -4,7 +4,7 @@ import PackageDescription
 let package = Package(
     name: "BlueOxNative",
     platforms: [
-        .macOS(.v15)
+        .macOS(.v26) // macOS Tahoe
     ],
     products: [
         .library(

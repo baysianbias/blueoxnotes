@@ -1,14 +1,14 @@
 # BlueOx Notes - Native macOS App
 
-A beautiful, native macOS note-taking app built with SwiftUI for macOS Sequoia (15.0+).
+A beautiful, native macOS note-taking app built with SwiftUI for **macOS Tahoe (26.0+)** with Liquid Glass design.
 
 ## Features
 
 - ✅ **Native macOS Experience** - Built with SwiftUI + AppKit
+- ✅ **Liquid Glass Design** - Reflective, refractive translucent materials (macOS 26)
 - ✅ **Floating Panel** - Always-on-top quick notes (like Inkdrop)
-- ✅ **Frosted Glass UI** - Beautiful translucent materials
 - ✅ **Markdown Support** - Write in markdown, see live preview
-- ✅ **Split View** - Editor and preview side-by-side
+- ✅ **Split View** - Editor and preview side-by-side with automatic Liquid Glass sidebar
 - ✅ **iCloud Sync** - Your notes sync automatically via SwiftData + iCloud
 - ✅ **Dark Mode** - Full dark mode support
 - ✅ **Keyboard Shortcuts** - ⌘N for new note, ⌘, for settings
@@ -16,9 +16,17 @@ A beautiful, native macOS note-taking app built with SwiftUI for macOS Sequoia (
 
 ## Requirements
 
-- macOS 15.0 (Sequoia) or later
-- Xcode 16.0 or later
+- **macOS 26.0 (Tahoe) or later**
+- Xcode 26.0 or later
 - Swift 6.0
+
+## Liquid Glass
+
+The app automatically adopts macOS Tahoe's Liquid Glass design:
+- NavigationSplitView sidebar shows reflections and wallpaper patterns
+- Floating panel uses glassEffect API for enhanced translucency
+- All materials dynamically transform based on surroundings
+- Simply built with Xcode 26 - Liquid Glass applied automatically!
 
 ## Building
 

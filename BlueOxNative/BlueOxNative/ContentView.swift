@@ -21,7 +21,7 @@ struct ContentView: View {
 
     var body: some View {
         NavigationSplitView {
-            // Sidebar
+            // Sidebar - gets Liquid Glass automatically in macOS 26!
             VStack(spacing: 0) {
                 // Search bar
                 HStack {

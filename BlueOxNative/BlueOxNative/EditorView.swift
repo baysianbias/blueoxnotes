@@ -69,9 +69,9 @@ struct MarkdownPreview: View {
 
     var body: some View {
         ScrollView {
+            // TODO: Use native WebView for proper markdown rendering (macOS 26)
+            // For now, simple text parsing
             VStack(alignment: .leading, spacing: 16) {
-                // Simple markdown rendering for now
-                // TODO: Use swift-markdown for proper rendering
                 ForEach(content.components(separatedBy: .newlines), id: \.self) { line in
                     if line.hasPrefix("# ") {
                         Text(line.dropFirst(2))
@@ -91,6 +91,7 @@ struct MarkdownPreview: View {
             .frame(maxWidth: .infinity, alignment: .leading)
             .padding()
         }
+        .glassEffect(in: .rect, isEnabled: true) // Liquid Glass preview pane
         .background(.ultraThinMaterial)
     }
 }
